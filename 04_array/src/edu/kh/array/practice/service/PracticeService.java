@@ -144,21 +144,97 @@ public class PracticeService {
 			}
 		}
 		
-		System.out.println(input + "에 " + ch + "가 존재하는 위치(인덱스): " + Arrays.toString(result));
+		System.out.print(input + "에 " + ch + "가 존재하는 위치(인덱스): ");
 		
+		for(int x = 0; x < count; x++) {
+			
+			System.out.print(result[x] + " ");
+			
+		}
+		
+		System.out.println("\n" +ch + " 개수: " + count);
 	
 	}
 
 	public void practice6() {
+	
+		/*
+		사용자가 배열의 길이를 직접 입력하여 그 값만큼 정수형 배열을 선언 및 할당하고 /
+		배열의 크기만큼 사용자가 직접 값을 입력하여 각각의 인덱스에 값을 초기화하세요.
+		그리고 배열 전체값을 나열하고 각 인덱스에 저장된 값들의 합을 출력하세요
+		*/
+		
+		int sum = 0; // 합계 저장할 변수
+		
+		// 1) 사용자가 배열의 길이를 직접 입력하여 그 값만큼 정수형 배열을 선언 및 할당하고
+		System.out.print("정수 : ");
+		int input = sc.nextInt();
+		int arr[] = new int [input];
+		
+		// 2) 배열의 크기만큼 사용자가 직접 값을 입력하여 각각의 인덱스에 값을 초기화하세요.
+		for(int i = 0; i < input; i++) {
+			System.out.print("배열 " + i + "번째 인덱스에 넣을 값: ");
+			int num = sc.nextInt();
+			arr[i] = num;
+			sum += num;
+		}
+		
+		// 3) 그리고 배열 전체값을 나열하고 각 인덱스에 저장된 값들의 합을 출력하세요.
+		for(int x = 0; x < arr.length; x++) {
+		System.out.print(arr[x] + " ");
+		}
+		System.out.println("\n총합: " + sum);
 
 	}
 
 	public void practice7() {
-
+	
+		// 주민등록번호 번호를 입력받아 성별을 나타내는 숫자 이후부터 *로 가리고 출력하세요
+		System.out.print("주민등록번호(-포함) : ");
+		String input = sc.nextLine();
+		char arr[] = new char [input.length()]; 
+		for(int i = 0; i < arr.length; i++) {
+			arr[i] = input.charAt(i);
+				if(i > 7) {
+					arr[i] = '*';
+				}
+		}
+		for(int x = 0; x < arr.length; x++) {
+			System.out.print(arr[x]);
+		}
 	}
 
 	public void practice8() {
-
+	/*
+	 3 이상인 홀수를 입력받아 배열의 중간까지는 1부터 1씩 증가하여 오름차순으로 값을 넣고,
+	 중간 이후부터 끝까지는 1씩 감소하여 내림차순으로 값을넣어 출력하세요.
+	 단, 입력한 정수가 홀수가 아니거나 3 미만일 경우 “다시입력하세요”를 출력하고
+	 다시 정수를 받도록 하세요
+	 */
+		
+	// 1) 3 이상인 홀수를 입력받아 배열의 중간까지는 1부터 1씩 증가하여 오름차순으로 값을 넣고,
+		
+		System.out.print("정수 : ");
+		int input = sc.nextInt();
+		
+		if(input % 2 == 1 && input >= 3) {
+			
+			int arr[] = new int[input];
+			
+			for(int i = 0; i < arr.length; i++) {
+				if((input/2) + 1 > (i+1)) {
+					arr[i] = i+1;
+				} else {
+					arr[i] = arr.length - (i);
+				}
+			}
+			for(int x = 0; x < arr.length; x++) {
+			System.out.print(arr[x] + ", ");
+			}
+		} else {
+			System.out.println("다시 입력하세요.");
+		}
+		
 	}
 
 	public void practice9() {

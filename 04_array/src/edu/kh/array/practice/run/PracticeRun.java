@@ -12,10 +12,10 @@ public class PracticeRun {
 		//ps.practice2();
 		//ps.practice3();
 		//ps.practice4();
-		ps.practice5();
+		//ps.practice5();
 		//ps.practice6();
 		//ps.practice7();
-		//ps.practice8();
+		ps.practice8();
 		//ps.practice9();
 		//ps.practice10();
 		//ps.practice11();
