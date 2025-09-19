@@ -20,10 +20,6 @@ public class OperatorPractice {
 		
 	} 
 	
-	 
-	 
-	 
-	 
 	  public void practice2( ) {
 		
 		
