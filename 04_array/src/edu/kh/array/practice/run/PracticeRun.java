@@ -18,9 +18,9 @@ public class PracticeRun {
 		//ps.practice8();
 		//ps.practice9();
 		//ps.practice10();
-		ps.practice11();
+		//ps.practice11();
 		//ps.practice12();
-		//ps.practice13();
+		ps.practice13();
 		//ps.practice14();
 		
 	}

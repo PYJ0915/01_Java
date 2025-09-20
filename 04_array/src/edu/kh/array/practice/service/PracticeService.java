@@ -323,11 +323,98 @@ public class PracticeService {
 	}
 
 	public void practice12() {
+		/*
+		 * 로또 번호 생성기 배열을 이용한 중복 데이터 제거 + 정렬 1. 1 ~ 45 사이 중복되지 않은 난수 6개 생성 2. 생성된 난수를
+		 * 오름차순으로 정렬
+		 * 
+		 */
 
+		int arr[] = new int[6];
+
+		for (int i = 0; i < arr.length; i++) {
+
+			int random = (int) (Math.random() * 45 + 1);
+
+			arr[i] = random;
+
+			for (int x = 0; x < i; x++) {
+
+				if (arr[x] == random) {
+					i--; // 다시 난수를 발생시켜 배열에 담기 위해서
+					break;
+				}
+			}
+		}
+
+		Arrays.sort(arr);
+		for (int i = 0; i < arr.length; i++) {
+			System.out.print(arr[i] + " ");
+		}
 	}
 
 	public void practice13() {
 
+		// 문자열을 입력받아 문자열에 어떤 문자가 들어갔는지 배열에 저장하고 문자의 개수와 함께 출력하세요.
+
+		System.out.print("문자열: ");
+		String input = sc.nextLine(); 
+
+		int count = 0; 
+
+		char arr[] = new char[input.length()]; // 문자열 전체를 잘라서 담을 배열
+
+		for (int i = 0; i < arr.length; i++) {
+
+			arr[i] = input.charAt(i);
+
+			for (int x = 0; x < i; x++) {
+
+				if (arr[i] == arr[x]) {
+					count++;
+					break;
+				}
+
+			}
+
+		}
+		char arr2[] = new char[arr.length - count]; // 중복되는 문자를 뺀 문자열을 담을 배열
+
+		int count2 = 0; // 배열 인덱스를 건너뛰는 것을 방지하는 변수
+
+		for (int i = 0; i < arr.length; i++) { // 원래 문자열 길이 만큼 반복 why? 그래야 문자열 전체를 검색하며 중복될 때는 담지 않고 중복되지 않을 때만 담을 수 있다.
+
+			boolean flag = true; // 중복이 발견 됐을 때 배열에 문자를 담지 않기 위한 표시
+
+			for (int x = 0; x < i; x++) {
+
+				if (arr[x] == arr[i]) {
+
+					flag = false;
+					count2++;
+					break;
+
+				}
+			}
+
+			if (flag) { 
+				arr2[i - count2] = input.charAt(i);
+			}
+
+		}
+
+		System.out.print("문자열에 있는 문자: ");
+		for (int i = 0; i < arr2.length; i++) {
+			if (i == arr2.length - 1) {
+
+				System.out.print(arr2[i]);
+
+			} else {
+
+				System.out.print(arr2[i] + ", ");
+
+			}
+		}
+		System.out.println("\n문자 개수: " + arr2.length);
 	}
 
 	public void practice14() {
