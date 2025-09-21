@@ -357,9 +357,9 @@ public class PracticeService {
 		// 문자열을 입력받아 문자열에 어떤 문자가 들어갔는지 배열에 저장하고 문자의 개수와 함께 출력하세요.
 
 		System.out.print("문자열: ");
-		String input = sc.nextLine(); 
+		String input = sc.nextLine();
 
-		int count = 0; 
+		int count = 0;
 
 		char arr[] = new char[input.length()]; // 문자열 전체를 잘라서 담을 배열
 
@@ -396,7 +396,7 @@ public class PracticeService {
 				}
 			}
 
-			if (flag) { 
+			if (flag) {
 				arr2[i - count2] = input.charAt(i);
 			}
 
@@ -418,6 +418,57 @@ public class PracticeService {
 	}
 
 	public void practice14() {
+
+		/*
+		 * 사용자가 입력한 배열의 길이 만큼의 문자열 배열을 선언 및 할당하고 배열의 인덱스에 넣을 값 역시 사용자가 입력하여 초기화하세요. 단,
+		 * 사용자에게 배열에 값을 더 넣을지 물어보고 몇 개를 더 입력할건지, 늘린 곳에 어떤 데이터를 넣을 것인지 받으세요. 사용자가 더 이상
+		 * 입력하지 않겠다고 하면 배열 전체 값을 출력하세요
+		 */
+		
+		System.out.print("배열의 크기를 입력하세요: ");
+		int size = sc.nextInt();
+		sc.nextLine();
+		
+		String arr[] = new String [size];
+		
+		for(int i = 0; i < size; i++) {
+			
+			System.out.print((i + 1) + "번째 문자열: ");
+			String input = sc.nextLine();
+			arr[i] = input;
+			
+			if(i + 1 == size) {
+				
+				System.out.print("더 값을 입력하시겠습니까? (y/n) : ");
+				char answer = sc.next().charAt(0);
+				
+				if(answer == 'y') {
+					
+					System.out.print("더 입력하고 싶은 개수: ");
+					int plus = sc.nextInt();
+					sc.nextLine();
+					size += plus;
+					
+				}
+				
+				String newArr[] = new String[size];
+				
+				newArr = Arrays.copyOf(arr, size);
+				
+				for (int x = i + 2; x < newArr.length; x++) {
+					System.out.print( x + "번째 문자열: ");
+					String input2 = sc.nextLine();
+					newArr[x - 1] = input2;
+				}
+					
+				if(answer == 'n') {
+					
+					System.out.println(Arrays.toString(newArr));
+					
+				}
+			}
+			
+		}
 
 	}
 
