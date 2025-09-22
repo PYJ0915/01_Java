@@ -185,15 +185,24 @@ public class PracticeService {
 		// 주민등록번호 번호를 입력받아 성별을 나타내는 숫자 이후부터 *로 가리고 출력하세요
 		System.out.print("주민등록번호(-포함) : ");
 		String input = sc.nextLine();
+		
 		char arr[] = new char[input.length()];
+		
 		for (int i = 0; i < arr.length; i++) {
+			
 			arr[i] = input.charAt(i);
+			
 			if (i > 7) {
+				
 				arr[i] = '*';
+				
 			}
+			
 		}
 		for (int x = 0; x < arr.length; x++) {
+			
 			System.out.print(arr[x]);
+			
 		}
 	}
 
@@ -284,12 +293,12 @@ public class PracticeService {
 
 		}
 		// 3) 배열 전체값과 그 값 중에서 최대값과 최소값을 출력하세요
-		// 오름차순 정리 후 첫 배열과 마지막 배열 출력 (예상 풀이) O
+		// 오름차순 정리 후 첫 배열과 마지막 배열 출력 
 
 		Arrays.sort(arr); // 오름차순 정리
 
 		System.out.println("\n최댓값: " + arr[arr.length - 1]);
-		System.out.println("최솟값: " + arr[0]);
+		System.out.println("최솟값: " + arr[0]); 
 
 	}
 
@@ -322,11 +331,12 @@ public class PracticeService {
 		}
 	}
 
-	public void practice12() {
+	public void practice12() {  // 3 16 25 35 40 41 
+	
 		/*
-		 * 로또 번호 생성기 배열을 이용한 중복 데이터 제거 + 정렬 1. 1 ~ 45 사이 중복되지 않은 난수 6개 생성 2. 생성된 난수를
-		 * 오름차순으로 정렬
-		 * 
+		 * 로또 번호 생성기 배열을 이용한 중복 데이터 제거 + 정렬  
+		 * 1 ~ 45 사이 중복되지 않은 난수 6개 생성 
+		 * 2. 생성된 난수를 오름차순으로 정렬
 		 */
 
 		int arr[] = new int[6];
@@ -425,51 +435,79 @@ public class PracticeService {
 		 * 입력하지 않겠다고 하면 배열 전체 값을 출력하세요
 		 */
 		
+		// 1. 첫 배열의 크기 지정
 		System.out.print("배열의 크기를 입력하세요: ");
 		int size = sc.nextInt();
-		sc.nextLine();
 		
-		String arr[] = new String [size];
+		sc.nextLine(); // 입력 버퍼에 남은 개행문자 제거
 		
-		for(int i = 0; i < size; i++) {
+		String arr[] = new String[size];
+		
+		// 2. 첫 배열에 저장할 문자열 입력받기
+		for(int i = 0; i < arr.length; i++) {
 			
-			System.out.print((i + 1) + "번째 문자열: ");
-			String input = sc.nextLine();
-			arr[i] = input;
-			
-			if(i + 1 == size) {
-				
-				System.out.print("더 값을 입력하시겠습니까? (y/n) : ");
-				char answer = sc.next().charAt(0);
-				
-				if(answer == 'y') {
-					
-					System.out.print("더 입력하고 싶은 개수: ");
-					int plus = sc.nextInt();
-					sc.nextLine();
-					size += plus;
-					
-				}
-				
-				String newArr[] = new String[size];
-				
-				newArr = Arrays.copyOf(arr, size);
-				
-				for (int x = i + 2; x < newArr.length; x++) {
-					System.out.print( x + "번째 문자열: ");
-					String input2 = sc.nextLine();
-					newArr[x - 1] = input2;
-				}
-					
-				if(answer == 'n') {
-					
-					System.out.println(Arrays.toString(newArr));
-					
-				}
-			}
+			System.out.print( (i + 1) + "번째 문자열: ");
+			arr[i] = sc.nextLine();
 			
 		}
-
+		
+		// 3. 반복이 시작되는 구간부터 while 작성하여 내부에 종료조건 만들어 break 이용하여 멈춤
+		
+		while (true) {
+			
+			System.out.print("더 값을 입력하시겠습니까(Y/N) : ");
+			char ch = sc.next().charAt(0);
+			
+			// 4. 값을 더 입력할 경우
+			if (ch == 'y' || ch == 'Y') {
+				
+				// 5. 더 입력받을 개수 입력받기
+				 System.out.print("더 입력하고 싶은 개수: ");
+				 int addSize = sc.nextInt();
+				 
+				 sc.nextLine();
+				 
+				 // 6. 새로 값을 입력받을 배열 생성
+				 // --> 기존 배열 크기 + 추가 입력 개수
+				 
+				 String newArr[] = new String[arr.length + addSize];
+				 
+				 // 7. 배열 복사 + 새로운 문자열 입력받기
+				 for(int i = 0; i < newArr.length; i++) {
+					 
+					 if(i < arr.length) { // 인덱스의 값이 기존 배열보다 작을 경우 (깊복)
+						 
+						 newArr[i] = arr[i];
+						 
+					 } else { // 인덱스의 값이 기존 배열보다 작을 경우 (새로운 값 입력받기)
+						 
+						 System.out.print((i+1) + "번째 문자열: ");
+						 newArr[i] = sc.nextLine();
+						 
+					 }
+					 
+				 }
+					 
+				 //8. 기존 배열공간을 참조하던 변수 arr에 새로운 배열공간의 주소를 가진 newArr 대입 (얕복)
+				 arr = newArr;
+				
+			} else if( ch == 'n' || ch =='N' ) {
+				
+				break;
+				
+			} else {
+				
+				System.out.println( "Y/N 으로 다시 입력하세요.");
+				
+			}
+			
+			
+			
+		}
+		
+		System.out.println(Arrays.toString(arr));
+		
+		
 	}
 
 }
