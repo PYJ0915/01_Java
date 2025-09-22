@@ -34,6 +34,48 @@ public class AbstractionService {
 		System.out.println("p1의 age: " + p1.age); 
 		*/
 		
+		// 값을 호출한 자리로 얻어온다 == getter
+		// p1.getName(); // 메소드의 호출
+		
+		// 전달한 값을 객체의 필드에 세팅한다 == setter
+		// 전달인자를 통해서 p1에 홍길동 데이터 세팅하기
+		p1.setName("홍길동"); // p1.setName (전달인자)
+		p1.setAddress("서울시 중구 남대문로 120");
+		p1.setAge(20);
+		p1.setGender('남');
+		p1.setPhone("010-1234-1234");
+		p1.setpNo("123456-1234567");
+		
+		// p1에 저장된 데이터 불러오기
+		System.out.println(p1.getName());
+		System.out.println(p1.getAddress());
+		System.out.println(p1.getAge());
+		System.out.println(p1.getGender());
+		System.out.println(p1.getPhone());
+		System.out.println(p1.getpNo());
+		
+		// 본인 객체 만들기
+		// People 클래스 이용하여 본인 이름의 객체 생성하기
+		// 본인 정보 setter값 대입
+		// 본인의 정보 getter 이용하여 콘솔창 출력까지
+		System.out.println("=========================================");
+		
+		People yujin = new People();
+		
+		yujin.setName("박유진"); 
+		yujin.setAddress("서울특별시 서대문구 홍은동");
+		yujin.setAge(24);
+		yujin.setGender('남');
+		yujin.setPhone("010-2340-3542");
+		yujin.setpNo("030103-3******");
+		
+		System.out.println(yujin.getName());
+		System.out.println(yujin.getGender());
+		System.out.println(yujin.getpNo());
+		System.out.println(yujin.getAddress());
+		System.out.println(yujin.getPhone());
+		System.out.println(yujin.getAge());
+		
 	}
 	
 	
