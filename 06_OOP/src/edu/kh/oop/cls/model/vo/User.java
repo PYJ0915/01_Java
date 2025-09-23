@@ -15,7 +15,7 @@ public class User {
 	private char userGender;
 
 	// 기본생성자 ( == 매개변수가 없는 생성자)
-	// 기본생성자 자동완성 단축키 : 클래스명 치고 ctrl + space -> enter
+	// 기본생성자 자동완성 단축키 : ctrl + space -> enter
 	public User() {
 		System.out.println("기본생성자로 User 객체 생성");
 		

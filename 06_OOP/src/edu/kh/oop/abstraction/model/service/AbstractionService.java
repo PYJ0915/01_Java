@@ -13,7 +13,7 @@ public class AbstractionService {
 		// People 클래스를 이용해서 국민 객체 만들기
 		People p1 = new People();
 		// People p1 : People 객체의 주소를 저장하여 참조하는 변수 p1(== 참조변수)
-		// new People : 새로운 People 객체를 Heap 영역에 생성
+		// new People(); : 새로운 People 객체를 Heap 영역에 생성
 		
 		/*
 		p1.name = "홍길동"; // The field People.name is not visible
