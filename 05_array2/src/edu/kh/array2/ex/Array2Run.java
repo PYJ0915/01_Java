@@ -9,9 +9,6 @@ public class Array2Run {
 		//a2.ex1();
 		//a2.ex2();
 		//a2.ex3();
-		//a2.ex4();
-		//a2.ex5();
-		//a2.ex6();
 	}
 
 }

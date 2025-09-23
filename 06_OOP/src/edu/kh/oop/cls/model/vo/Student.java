@@ -22,10 +22,33 @@ public class Student { // 클래스 선언부
 	
 	private int v4 = 40; // 해당클래스 내부에서만 가능
 	
+	// static 예약어
+	public static String schoolName = "KH고등학교";
+	
+	// final 예약어
+	private final int TEMP1 = 100;
+	
+	// getter 만 만들어진 이유
+	// final 예약어가 붙은 상수 TEMP1은 재대입이 불가하여 setter 를 굳이 만들어주지 않음
+	public int getTEMP1() {
+		return TEMP1;
+	}
+
+	
+	// 2. 생성자(Constructor) -> 다른 클래스에서
+	
+	
+	// 오버로딩: 한 클래스 내에 동일한 이름의 메서드를 여러 개 작성하는 기법
+	
+	// 오버로딩 작성 규칙
+	// 1) 메서드명 동일
+	// 2) 매개변수의 자료형, 개수, 순서가 달라야함
+	// 3) 반환형은 같아도 되고 달라도 된다
+	// 4) 변수명은 신경쓰지 않는다 -> 변수명이 달라도 매개변수의 자료형, 개수, 순서가 같다면 오버로딩 성립 불가
 	
 	
 	
-	// 2. 생성자
+	
 	// 3. 메서드
 	
 	public void ex() {
@@ -40,5 +63,8 @@ public class Student { // 클래스 선언부
 		System.out.println( v4 );
 		
 	}
+
+
+	
 	
 }
