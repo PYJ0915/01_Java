@@ -2,18 +2,24 @@ package edu.kh.oop.method.run;
 
 import edu.kh.oop.method.model.service.MemberService;
 import edu.kh.oop.method.model.service.MethodExample;
+import edu.kh.oop.method.model.vo.Member;
 
 public class MethodRun {
 
 	public static void main(String[] args) {
 		
-		MethodExample me = new MethodExample();
+		MethodExample ex = new MethodExample();
 		
-		// me.method1();
 		
-		MemberService ms = new MemberService();
+		MemberService service = new MemberService();
 		
-		ms.displayMenu();
+		//service.displayMenu();
+		
+		Member member = new Member("user01", "pass01", "홍길동", 20);
+		
+		System.out.println(member);
+		System.out.println(member.toString());
+		
 	}
 
 }
