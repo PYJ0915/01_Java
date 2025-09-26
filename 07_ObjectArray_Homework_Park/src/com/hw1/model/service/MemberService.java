@@ -18,9 +18,9 @@ public class MemberService {
 
 	public MemberService() {
 		
-		memberInfo[0] = new Member("user01", "pass01", "홍길동", 20, "서울 서대문구");
-		memberInfo[1] = new Member("user02", "pass02", "허균", 57, "서울 종로구");
-		memberInfo[2] = new Member("user03", "pass03", "이순신", 43, "서울 광화문");
+		memberInfo[0] = new Member("user01", "pass01", "홍길동", 20, "서울");
+		memberInfo[1] = new Member("user02", "pass02", "허균", 57, "경기");
+		memberInfo[2] = new Member("user03", "pass03", "이순신", 43, "제주도");
 		
 	}
 	
@@ -56,7 +56,8 @@ public class MemberService {
 		case 4: 
 			System.out.println(updateMember());
 			break;
-		case 5: /*searchMember()*/
+		case 5:
+			System.out.println(searchMember());
 			break;
 		case 0: 
 			System.out.println("프로그램을 종료합니다...");
@@ -212,7 +213,28 @@ public class MemberService {
 		
 	}
 	
-	public void searchMember() {
+	public String searchMember() {
+		System.out.println("\n======= 회원 검색(지역) =======");
 		
+		System.out.print("검색할 지역 입력: ");
+		String searchRegion = sc.next();
+		
+		
+		for(int i = 0; i < memberInfo.length; i++) {
+			
+			if(memberInfo[i] == null) {
+				
+				break;
+				
+			}
+			
+			if(searchRegion.equals(memberInfo[i].getMemberRegion())) {
+				
+				return "아이디: " + memberInfo[i].getMemberId() + "\n이름: " + memberInfo[i].getMemberName();
+				
+			}
+			
+		}
+				return "일치하는 검색 결과가 없습니다";
 	}
 }
