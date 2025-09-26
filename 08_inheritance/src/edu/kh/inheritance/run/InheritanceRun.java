@@ -8,7 +8,9 @@ public class InheritanceRun {
 
 		InheritanceService is = new InheritanceService();
 		
-		is.ex1();
+		//is.ex1();
+		//is.ex2();
+		is.ex3();
  	}
 
 }

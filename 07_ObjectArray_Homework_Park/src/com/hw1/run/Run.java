@@ -1,11 +1,11 @@
 package com.hw1.run;
 
-import com.hw1.model.vo.Employee;
+import com.hw1.model.service.MemberService;
 
 public class Run {
 	public static void main(String[] args) {
 	
-		Employee[] empArr = new Employee[3];
+	/*	Employee[] empArr = new Employee[3];
 		Employee emp = new Employee();
 		
 		empArr[0] = new Employee();
@@ -52,4 +52,12 @@ public class Run {
 		System.out.println("================================================================================");
 		System.out.println("직원들의 연봉의 평균: " + sum/3 + "원");
 	}
+	*/
+	
+		MemberService service = new MemberService();
+	
+		service.displayMenu();
+		
+	}	
+		
 }
