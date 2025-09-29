@@ -23,7 +23,6 @@ public class MemberService {
 		memberArr[0] = new Member("user01", "pass01", "홍길동", 30, "서울");
 		memberArr[1] = new Member("user02", "pass02", "게보린", 25, "경기");
 		memberArr[2] = new Member("user03", "pass03", "고길동", 45, "강원");
-		
 	}
 	
 	// 메뉴 출력용 메서드
