@@ -11,7 +11,16 @@ public class Employee extends Person{
 
 	@Override
 	public String getInfo() {
-		return "ID: " + id + "," + "이름 : " + name + "," + "직책 : " + position;
+		return "ID: " + id + " , " + " 이름 : " + name + " , " + " 직책 : " + position;
 	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+	
 	
 }

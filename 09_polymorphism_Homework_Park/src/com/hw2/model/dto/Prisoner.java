@@ -11,7 +11,7 @@ public class Prisoner extends Person{
 
 	@Override
 	public String getInfo() {
-		return "ID: " + id + "," + "이름 : " + name + "," + "죄목 : " + crime;
+		return "ID : " + id + " , " + " 이름 : " + name + " , " + " 죄목 : " + crime;
 	}
 	
 }
