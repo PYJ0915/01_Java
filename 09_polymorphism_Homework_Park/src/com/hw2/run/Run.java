@@ -19,24 +19,29 @@ public class Run {
 		
 		Person prisoner1 = new Prisoner("1205", "정준하", "밥도둑");
 		Person prisoner2 = new Prisoner("0705", "박명수", "웃음연쇄살인");
+		// 업캐스팅 -> 부모타입의 매개변수를 사용하기 위해
 		
 		c.addPerson(emp1);
 		c.addPerson(emp2);
 		System.out.println("전체 직원 명단: ");
-		c.displayAllPerson();
+		c.displayAllPersons();
 		System.out.println("======================================================================");
 		p.addPerson(prisoner1);
 		p.addPerson(prisoner2);
 		System.out.println("전체 수감자 명단: ");
-		p.displayAllPerson();
+		p.displayAllPersons();
 		System.out.println("======================================================================");
-		c.removePerson("EMP001");
+		c.removePerson("EMP002");
 		p.removePerson("1205");
 		System.out.println("======================================================================");
 		System.out.println("전체 직원 명단: ");
-		c.displayAllPerson();
+		c.displayAllPersons();
 		System.out.println("전체 수감자 명단: ");
-		p.displayAllPerson();
+		p.displayAllPersons();
+		System.out.println("======================================================================");
+		System.out.println("현재 직원 수: " + c.getEmployeeCount() + "명");
+		System.out.println("현재 수감자 수: " + p.getPrisonerCount() + "명");
+		
 		
 	}
 

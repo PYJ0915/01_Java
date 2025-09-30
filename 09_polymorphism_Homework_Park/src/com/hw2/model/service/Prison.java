@@ -11,6 +11,7 @@ public class Prison implements ManagementSystem {
 
 	public Prison(int size) {
 		prisoners = new Prisoner[size];
+		prisonerCount = 0;
 	}
 
 	@Override
@@ -19,9 +20,10 @@ public class Prison implements ManagementSystem {
 		for (int i = 0; i < prisoners.length; i++) {
 			
 			if(prisoners[i] == null) {
-				prisoners[i] = (Prisoner)person;
+				prisoners[i] = (Prisoner)person; // 다운캐스팅 -> 자식 필드에 접근하기 위해
 				System.out.print("수감자가 추가되었습니다 - ");
 				System.out.println(prisoners[i].getInfo());
+				prisonerCount++;
 				return;
 			}
 		}
@@ -40,17 +42,17 @@ public class Prison implements ManagementSystem {
 				System.out.print("수감자가 삭제되었습니다 - ");
 				System.out.println(prisoners[i].getInfo());
 				prisoners[i] = null;
-				break;
+				prisonerCount--;
+				return;
 
-			} else {
-				System.out.println("해당하는 수감자를 찾을 수 없습니다.");
-			}
+			}  
 
 		}
+		System.out.println("해당하는 수감자를 찾을 수 없습니다.");
 	}
 
 	@Override
-	public void displayAllPerson() {
+	public void displayAllPersons() {
 
 		for (int i = 0; i < prisoners.length; i++) {
 
@@ -58,10 +60,16 @@ public class Prison implements ManagementSystem {
 
 				System.out.println(prisoners[i].getInfo());
 				
-				prisonerCount++;
-				
 			}
 		}
+	}
+
+	public int getPrisonerCount() {
+		return prisonerCount;
+	}
+
+	public void setPrisonerCount(int prisonerCount) {
+		this.prisonerCount = prisonerCount;
 	}
 
 }
