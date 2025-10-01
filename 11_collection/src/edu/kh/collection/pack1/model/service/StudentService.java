@@ -1,6 +1,8 @@
 package edu.kh.collection.pack1.model.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -27,6 +29,15 @@ public class StudentService {
 	
 	private Scanner sc = new Scanner(System.in);
 	
+	public StudentService() { // 기본 생성자
+		
+		studentList.add(new Student("홍길동", 23, "서울시 중구", 'M', 60));
+		studentList.add(new Student("이수지", 20, "경기도 안산", 'F', 88));
+		studentList.add(new Student("강하늘", 25, "서울시 강남구", 'M', 97));
+		studentList.add(new Student("오미나", 24, "충북 청주시", 'F', 54));
+		studentList.add(new Student("박주희", 24, "서울시 서대문구", 'F', 70));
+		
+	}
 	
 	// new ArrayList() : 기본 생성자 -> 기본 크기 10짜리 리스트 생성
 	// 하지만 리스트의 크기는 줄었다 늘었다 하기 때문에 큰 의미 X
@@ -56,6 +67,7 @@ public class StudentService {
 			
 		}
 		
+	
 	}
 	
 	
@@ -82,6 +94,8 @@ public class StudentService {
 				System.out.println("4. 학생 정보 제거");
 				System.out.println("5. 이름으로 검색 (완전 일치)");
 				System.out.println("6. 이름으로 검색 (포함)");
+				System.out.println("7. 나이 순으로 정렬"); // Comparable 사용
+				System.out.println("8. 이름순으로 정렬(가나다순)"); // Comparator 사용
 				System.out.println("0. 프로그램 종료");
 				
 				System.out.print("메뉴 번호 선택 : ");
@@ -93,19 +107,25 @@ public class StudentService {
 					System.out.println(addStudent());
 					break;
 				case 2:
-					/*selectAll();*/
+					selectAll();
 					break;
 				case 3:
-					/*updateStudent();*/
+					System.out.println(updateStudent());
 					break;
 				case 4:
-					/*removeStudent();*/
+					System.out.println(removeStudent());
 					break;
 				case 5:
-					/*searchName1();*/
+					searchName1();
 					break;
 				case 6:
-					/*searchName2();*/
+					searchName2();
+					break;
+				case 7:
+					sortByAge();
+					break;
+				case 8:
+					sortByName();
 					break;
 				case 0:
 					System.out.println("프로그램 종료...");
@@ -130,6 +150,8 @@ public class StudentService {
 	}
 	
 	
+
+
 	/**
 	 * 1. 학생 정보 추가 메서드
 	 * 
@@ -181,6 +203,310 @@ public class StudentService {
 			return "\n실패";
 			
 		}
+	}
+	
+	/**
+	 *  2. 학생 전체 조회 메서드
+	 *  
+	 *  - List가 비어있는 경우 "학생 정보가 없습니다" 출력, 비어있지 않을 경우 학생 전체 정보 출력
+	 */
+	public void selectAll() {
+		System.out.println("\n======= 학생 전체 조회 =======");
+		
+		
+		// studentList가 비어있는지 체크!
+		// List에 저장된 데이터의 개수를 얻어오는 방법 : int List.size();
+		// boolean List isEmpty() : 컬렉션이 비어있다면 true 반환
+		
+		// if(studentList.size() == 0) 
+			
+		if(studentList.isEmpty()) {
+			
+			System.out.println("학생 정보가 없습니다.");
+			return; // 현재 메서드를 종료하고 호출한 곳을 돌아감
+			
+		}
+			// 학생 전체 정보 출력
+		
+		/* 1. 일반 for 문
+		
+	 	for(int i = 0; i < studentList.size(); i++) {
+			
+			System.out.println(studentList.get(i));
+			
+		} */
+		
+	  // 2. 향상된 for 문
+	  // - 컬렉션, 배열의 모든 요소를 순차적으로 반복 접근할 수 있는 for 문
+		int index = 0;
+		
+		for(Student std : studentList) {
+			
+			System.out.println( index++ + "번: " + std );
+			
+		}
+		
+		
+	}
+	
+	/**
+	 * 3. 학생 정보 수정 메서드
+	 * 
+	 *  - 학생 정보가 studentList에 하나라도 있는지 검사, 없다면 "입력된 학생정보가 없습니다" 문자열 반환
+	 *  
+	 *  - 인덱스 번호로 선택하여 학생을 수정, 입력된 숫자가 0보다 작은지 검사 작다면 "음수는 입력할 수 없습니다" 반환
+	 *  
+	 *  - studentList 범위 내 인덱스 번호인지 검사, 이상이라면 "범위를 넘어선 값을 입력할 수 없습니다" 반환
+	 *  
+	 *  - 수정할 때
+	 *  1. index 번째에 저장된 학생 정보를 수정 전에 한 번 출력
+	 *  2. 이름, 나이, 사는 곳, 성별, 점수 수정할 값 입력 받기
+	 *  3. 수정이 완료되었다면, "OOO의 정보가 변경되었습니다" 반환
+	 *  
+	 * @return
+	 */
+	public String updateStudent() {
+		
+		System.out.println("\n======= 학생 정보 수정 =======");
+		
+		if(studentList.isEmpty()) {
+			
+			return "\n입력된 학생 정보가 없습니다";
+			
+		}
+		
+		// 인덱스 번호 체크
+		
+		System.out.print("인덱스 번호를 입력해주세요 : ");
+		int index = sc.nextInt();
+		
+		if(index < 0) {
+			
+			return "\n음수는 입력할 수 없습니다";
+			
+		}
+		
+		if(index >= studentList.size()) {
+			
+			return "\n범위를 넘어선 값을 입력할 수 없습니다";
+			
+		}
+		
+		// 수정 코드 작성
+		// 1. index 번째에 있는 학생 정보 출력
+		System.out.println(index + "번째에 저장된 학생 정보" );
+		System.out.println(studentList.get(index));
+		
+		// 2. 수정할 내용 입력받기
+		System.out.print("수정할 이름: ");
+		String name = sc.next();
+		 
+		System.out.print("수정할 나이: ");
+		int age = sc.nextInt();
+		
+		sc.nextLine();
+		
+		System.out.print("수정할 사는 곳: ");
+		String region = sc.nextLine();
+		
+		System.out.print("수정할 성별: ");
+		char gender = sc.next().charAt(0);
+		
+		System.out.print("수정할 점수: ");
+		int score = sc.nextInt();
+		
+		// 입력 받은 index 번째의 수정할 학생정보 세팅 => 수정
+		
+		Student temp = studentList.set(index, new Student(name, age, region, gender, score));
+		// E List.set(int index, E e) : 주어진 인덱스번째의 객체를 주어진 객체로 덮어쓰면서(수정), 기존 객체 반환
+		
+		return temp.getName() + "님의 " + "정보가 변경되었습니다.";
+	}
+	
+	/**
+	 * 4. 학생 정보 제거 메서드
+	 * 
+	 * 수정과 같은 검사 후 삭제시 "정말 삭제하겠습니까? (Y/N) : " Y를 입력했다면 인덱스에 있는 객체 삭제 후
+	 * "OOO님의 정보가 제거되었습니다" 문자열 반환, N을 입력했다면 "취소" 반환
+	 * 
+	 * @return
+	 */
+	public String removeStudent() {
+		
+		System.out.println("\n======= 학생 정보 제거 =======");
+		
+	if(studentList.isEmpty()) {
+			
+			return "\n입력된 학생 정보가 없습니다";
+			
+		}
+		
+		// 인덱스 번호 체크
+		
+		System.out.print("인덱스 번호를 입력해주세요 : ");
+		int index = sc.nextInt();
+		
+		if(index < 0) {
+			
+			return "\n음수는 입력할 수 없습니다";
+			
+		}
+		
+		if(index >= studentList.size()) {
+			
+			return "\n범위를 넘어선 값을 입력할 수 없습니다";
+			
+		}
+		
+		// 삭제
+		System.out.print("정말 삭제하시겠습니까? (Y/N) : ");
+		char answer = sc.next().toLowerCase().charAt(0);
+		
+		// E List.remove(int index) : 리스트에서 index 번째 요소 제거 -> 제거된 요소 반환
+		// List 중간에 비어있는 인덱스가 없게 하기 위해서 remove() 동작 시 뒤쪽 요소를 한 칸씩 당겨오는 행위 하고 있음
+		if(answer == 'y') {
+			
+			Student temp = studentList.remove(index);
+			
+			return temp.getName() + "님의 정보가 제거되었습니다";
+			
+		} 
+		
+		return "취소";
+		
+	}
+	
+	/**
+	 * 5. 이름이 일치하는 학생을 찾아 조회하는 메서드 (완전 일치)
+	 * 
+	 * - 검색할 이름을 입력받아 studentList에서 꺼내온 Student 객체의 name 값이 같은지 확인
+	 * 
+	 * - 일치하는 경우에는 Student 객체 출력, 일치하는 경우가 없다면 "검색 결과가 없습니다" 출력
+	 * 
+	 */
+	public void searchName1() {
+		
+		System.out.println("\n======= 학생 검색 (완전 일치) =======");
+		
+		System.out.print("검색할 이름 입력: ");
+		String name = sc.next();
+		
+		boolean flag = true;
+		
+		for(Student std : studentList) {
+			
+			if(name.equals(std.getName())) {
+				
+				System.out.println( std );
+				flag = false;
+			}
+			
+		}
+		
+		if(flag) {
+			
+			System.out.println("검색 결과가 없습니다");
+			
+		}
+		
+	}
+	
+	/**
+	 * 6. 이름에 특정 문자열이 포함되는 학생을 찾아서 조회하는 메서드 (일부분 일치)
+	 * 
+	 * - 검색할 문자열을 입력받아 studentList에서 꺼내온 Student 객체의 name 값의 일부가 있는지 확인
+	 * 
+	 * - 일부가 존재하는 경우에는 Student 객체 출력, 존재하지 않는 경우에는 "검색 결과가 없습니다" 출력
+	 */
+	public void searchName2() {
+		
+		System.out.println("\n======= 학생 검색(이름 부분 포함) =======");
+		
+		System.out.print("이름에 포함되는 문자열 입력: ");
+		String input = sc.next();
+		
+		boolean flag = true;
+		
+		for(Student std : studentList) {
+			
+			// boolean String.contains(문자열) : String에 문자열이 포함되어 있으면 true 반환
+			if(std.getName().contains(input)) {
+				//std.getName에 input이 포함되어 있느냐?
+				System.out.println( std );
+				flag = false;
+				
+			}
+			
+		}
+		
+		if(flag) {
+			
+			System.out.println("검색결과가 없습니다");
+			
+		}
+		
+	}
+	
+	/* List를 정렬하는 방법
+	*
+	* 방법 1: Comparable 인터페이스 상속받아 compareTo() 메서드 재정의
+	* Student에 Comparable 인터페이스를 상속받아
+	* 오버라이딩한 compareTo()에 정의한 대로 정렬됨 (나이 오름차순, 내림차순..)
+	*
+	* 방법 2: Comparator 클래스에 의한 정렬 compare() 사용 (익명 내부 클래스 이용)
+	*
+	* 익명 내부 클래스란?
+	* 이름이 없는 클래스를 즉석에서 선언해서 한 번만 사용할 목적으로
+	* 작성 객체를 생성하면서 바로 구현 내용을 정의할 수 있음
+	*
+	* <익명 내부클래스 장점>
+	* 코드 간결화(별도로 클래스를 만들지 않아도 될 때 사용)
+	* 즉시 사용(한 번만 사용할 Comparator 등을 정의할 때 유용함)
+	* 지역화(특정 메서드 안에서만 필요할 때)
+	*/
+	
+	/**
+	 * 7. 나이에 따라 오름차순 정렬 (Comparable 인터페이스 사용)
+	 */
+	private void sortByAge() {
+		
+		Collections.sort(studentList);
+		
+		for(Student std : studentList) {
+			
+			System.out.println(std);
+			
+		}
+		
+	}
+	
+	/**
+	 * 8. 이름으로 정렬 (가나다순) (Comparator 사용)
+	 */
+	private void sortByName() {
+		
+		Collections.sort(studentList, new Comparator<Student>() {
+
+			@Override
+			public int compare(Student o1, Student o2) {
+				// 이름 비교
+				// name String형이라 compareTo()로 비교
+				// String.compareTo() : 자바에서 객체를 비교할 때 쓰는 메서드
+				// (String이 Comparable을 상속받아 재정의 해둔 compareTo() 메서드를 이용하는 것)
+				// -> 두 객체를 비교하고 문자열의 순서 결정
+				
+				return o1.getName().compareTo(o2.getName());
+				
+			}
+			
+		});
+		
+		for(Student std : studentList) {
+			
+			System.out.println(std);
+			
+		}
+		
 	}
 	
 } 
