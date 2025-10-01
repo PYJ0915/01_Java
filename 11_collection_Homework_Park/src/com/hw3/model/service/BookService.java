@@ -12,6 +12,7 @@ public class BookService {
 	private Scanner sc = new Scanner(System.in);
 
 	private List<Book> bookList = new ArrayList<>();
+	private List<Book> bookMarkList = new ArrayList<>();
 
 	public BookService() {
 
@@ -37,8 +38,8 @@ public class BookService {
 				System.out.println("3. 도서 수정");
 				System.out.println("4. 도서 삭제");
 				System.out.println("5. 즐겨찾기 추가");
-				System.out.println("6. 즐겨찾기 삭제");
-				System.out.println("7. 즐겨찾기 조회");
+				System.out.println("6. 즐겨찾기 조회");
+				System.out.println("7. 즐겨찾기 삭제");
 				System.out.println("8. 추천도서 뽑기");
 				System.out.println("0. 프로그램 종료");
 				System.out.print("메뉴를 입력하세요 : ");
@@ -56,19 +57,19 @@ public class BookService {
 					updateBook();
 					break;
 				case 4:
-					removeBook();
+					System.out.println(removeBook());
 					break;
 				case 5:
-					/* addBookMark(); */
+					System.out.println(addBookMark());
 					break;
 				case 6:
-					/* selectBookMark(); */
+					selectBookMark(); 
 					break;
 				case 7:
-					/* removeBookMark(); */
+					System.out.println(removeBookMark());
 					break;
 				case 8:
-					/* pickBook(); */
+					pickBook(); 
 					break;
 				case 0:
 					System.out.println("프로그램을 종료합니다.");
@@ -134,8 +135,8 @@ public class BookService {
 
 		for (Book b : bookList) {
 
-			System.out.println(b);
 			System.out.println();
+			System.out.println(b);
 
 		}
 
@@ -143,12 +144,13 @@ public class BookService {
 
 	public void updateBook() {
 
+		System.out.println("\n======== 도서 수정 ========");
+
 		for (Book b : bookList) {
 
+			System.out.println();
 			System.out.println(b);
 		}
-
-		System.out.println("\n======== 도서 수정 ========");
 
 		if (bookList.isEmpty()) {
 
@@ -157,7 +159,7 @@ public class BookService {
 
 		}
 
-		System.out.print("수정할 도서 번호를 입력하세요 ");
+		System.out.print("\n수정할 도서 번호를 입력하세요: ");
 		int num = sc.nextInt();
 
 		// 일치하는 도서 번호가 있는지 검색
@@ -165,65 +167,73 @@ public class BookService {
 
 			// 일치하는 도서 번호가 있을 때
 			if (num == bookList.get(i).getBookNum()) {
+				
+				int input = 0;
 
-				System.out.println("1. 도서명");
-				System.out.println();
+				do {
 
-				System.out.println("2. 도서 저자");
-				System.out.println();
+					System.out.println("\n1. 도서명");
+					System.out.println();
 
-				System.out.println("3. 도서 가격");
-				System.out.println();
+					System.out.println("2. 도서 저자");
+					System.out.println();
 
-				System.out.println("4. 도서 출판사");
-				System.out.println();
+					System.out.println("3. 도서 가격");
+					System.out.println();
 
-				System.out.println("0. 수정종료");
-				System.out.println();
+					System.out.println("4. 도서 출판사");
+					System.out.println();
 
-				System.out.print("어떤 정보를 수정하시겠습니까? ");
-				int input = sc.nextInt();
-				sc.nextLine();
+					System.out.println("0. 수정종료");
+					System.out.println();
 
-				switch (input) {
-				case 1: // 도서명 수정
+					System.out.print("어떤 정보를 수정하시겠습니까? ");
+					
+					input = sc.nextInt();
+					sc.nextLine();
 
-					System.out.print("수정할 도서명을 입력하세요: ");
-					String updateName = sc.nextLine();
-					bookList.get(i).setName(updateName);
-					System.out.println("수정 완료");
-					break;
+					switch (input) {
+					case 1: // 도서명 수정
 
-				case 2: // 도서 저자 수정
+						System.out.print("수정할 도서명을 입력하세요: ");
+						String updateName = sc.nextLine();
+						bookList.get(i).setName(updateName);
+						System.out.println("수정 완료");
+						break;
 
-					System.out.print("수정할 도서명을 입력하세요: ");
-					String updateAuthor = sc.nextLine();
-					bookList.get(i).setAuthor(updateAuthor);
-					System.out.println("수정 완료");
-					break;
+					case 2: // 도서 저자 수정
 
-				case 3: // 도서 가격 수정
+						System.out.print("수정할 도서 저자를 입력하세요: ");
+						String updateAuthor = sc.nextLine();
+						bookList.get(i).setAuthor(updateAuthor);
+						System.out.println("수정 완료");
+						break;
 
-					System.out.print("수정할 도서명을 입력하세요: ");
-					int updatePrice = sc.nextInt();
-					bookList.get(i).setPrice(updatePrice);
-					System.out.println("수정 완료");
-					break;
+					case 3: // 도서 가격 수정
 
-				case 4: // 도서 출판사 수정
+						System.out.print("수정할 도서 가격을 입력하세요: ");
+						int updatePrice = sc.nextInt();
+						bookList.get(i).setPrice(updatePrice);
+						System.out.println("수정 완료");
+						break;
 
-					System.out.print("수정할 도서명을 입력하세요: ");
-					String updatePublisher = sc.nextLine();
-					bookList.get(i).setName(updatePublisher);
-					System.out.println("수정 완료");
-					break;
+					case 4: // 도서 출판사 수정
 
-				case 0: // 프로그램 종료
+						System.out.print("수정할 도서 출판사를 입력하세요: ");
+						String updatePublisher = sc.nextLine();
+						bookList.get(i).setName(updatePublisher);
+						System.out.println("수정 완료");
+						break;
 
-					System.out.println("수정이 종료되었습니다.");
-					break;
+					case 0: // 프로그램 종료
 
-				}
+						System.out.println("종료합니다...");
+						System.out.println("=== 모든 수정 완료 ===");
+						break;
+
+					}
+
+				} while (input != 0);
 
 				return;
 
@@ -238,48 +248,139 @@ public class BookService {
 
 	}
 
-	public void removeBook() {
+	public String removeBook() {
 
-		
 		System.out.println("\n======== 도서 삭제 ========");
 
 		if (bookList.isEmpty()) {
 
-			System.out.println("도서 목록이 비어있습니다");
-			return;
+			return "도서 목록이 비어있습니다";
 
 		}
 
 		for (Book b : bookList) {
 
+			System.out.println();
 			System.out.println(b);
 
 		}
 
-		System.out.print("삭제할 도서의 번호를 입력하세요: ");
+		System.out.print("\n삭제할 도서의 번호를 입력하세요: ");
 		int bookNo = sc.nextInt();
 
 		for (int i = 0; i < bookList.size(); i++) {
 
 			if (bookNo == bookList.get(i).getBookNum()) {
 
-				System.out.print("정말 삭제하시겠습니까? (Y/N) ");
+				System.out.print("정말 삭제하시겠습니까? (Y/N): ");
 				char answer = sc.next().toLowerCase().charAt(0);
 
 				if (answer == 'y') {
-					
-					bookList.remove(i);
-					System.out.println("삭제 완료되었습니다.");
-					return;
 
-				} 
-				
-				System.out.println("취소");
-				return;
+					bookList.remove(i);
+
+					return "\n삭제 완료되었습니다";
+
+				}
+
+				return "취소";
 
 			}
 
 		}
 
+		return "해당 번호의 도서가 존재하지 않습니다";
+
+	}
+
+	public String addBookMark() {
+
+		System.out.println("\n======== 즐겨찾기 추가 ========");
+		System.out.print("즐겨찾기 할 도서번호 : ");
+		int bookMark = sc.nextInt();
+
+		for (Book b : bookList) {
+			
+			if (bookMark == b.getBookNum()) {
+				
+				bookMarkList.add( b );
+				return b.getBookNum() + "번 도서가 즐겨찾기에 추가 되었습니다.";
+				
+			}
+
+		}
+		
+		return "해당 번호의 도서가 존재하지 않습니다.";
+		
+	}
+	
+	public void selectBookMark() {
+		
+		System.out.println("\n======== 즐겨찾기 조회 ========");
+		
+		if (bookMarkList.isEmpty()) {
+
+			System.out.println("즐겨찾기 목록이 비어있습니다.");
+			return;
+
+		}
+		
+		for(Book b : bookMarkList) {
+			
+			System.out.println( b );
+			return;
+			
+		}
+		
+	}
+	
+	public String removeBookMark() {
+		
+		System.out.println("\n======== 즐겨찾기 삭제 ========");
+
+		if (bookMarkList.isEmpty()) {
+
+			return "즐겨찾기 목록이 비어있습니다";
+
+		}
+
+		System.out.print("\n삭제할 도서의 번호를 입력하세요: ");
+		int bookNo = sc.nextInt();
+
+		for (int i = 0; i < bookList.size(); i++) {
+
+			if (bookNo == bookMarkList.get(i).getBookNum()) {
+
+				System.out.print("정말 삭제하시겠습니까? (Y/N): ");
+				char answer = sc.next().toLowerCase().charAt(0);
+
+				if (answer == 'y') {
+
+					bookMarkList.remove(i);
+
+					return "\n삭제 완료되었습니다";
+
+				}
+
+				return "취소";
+
+			}
+
+		}
+
+		return "해당 번호의 도서가 존재하지 않습니다";
+		
+		
+	}
+	
+	public void pickBook() {
+		
+		System.out.println("\n======== 추천도서 뽑기 =========");
+		
+		int random = (int)(Math.random() * bookList.size());
+		
+		System.out.println(bookList.get(random).getName());
+		
+		
 	}
 }
