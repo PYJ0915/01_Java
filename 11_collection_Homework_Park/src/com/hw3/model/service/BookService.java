@@ -168,7 +168,7 @@ public class BookService {
 			// 일치하는 도서 번호가 있을 때
 			if (num == bookList.get(i).getBookNum()) {
 				
-				int input = 0;
+				int menuNum = 0;
 
 				do {
 
@@ -189,10 +189,10 @@ public class BookService {
 
 					System.out.print("어떤 정보를 수정하시겠습니까? ");
 					
-					input = sc.nextInt();
+					menuNum = sc.nextInt();
 					sc.nextLine();
 
-					switch (input) {
+					switch (menuNum) {
 					case 1: // 도서명 수정
 
 						System.out.print("수정할 도서명을 입력하세요: ");
@@ -221,7 +221,7 @@ public class BookService {
 
 						System.out.print("수정할 도서 출판사를 입력하세요: ");
 						String updatePublisher = sc.nextLine();
-						bookList.get(i).setName(updatePublisher);
+						bookList.get(i).setPublisher(updatePublisher);
 						System.out.println("수정 완료");
 						break;
 
@@ -233,7 +233,7 @@ public class BookService {
 
 					}
 
-				} while (input != 0);
+				} while (menuNum != 0);
 
 				return;
 
