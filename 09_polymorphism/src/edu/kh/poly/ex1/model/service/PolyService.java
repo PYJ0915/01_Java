@@ -119,7 +119,7 @@ public class PolyService {
 		
 	}
 	
-	// 다형성(업캐스팅)을 이용한 매개변수 사용법
+	// 3) 다형성(업캐스팅)을 이용한 매개변수 사용법
 	public void ex2() {
 		
 		Tesla t = new Tesla("전기모터", "전기", 4, 1000000);

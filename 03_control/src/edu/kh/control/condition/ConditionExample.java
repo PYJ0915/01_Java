@@ -284,19 +284,26 @@ public class ConditionExample { // 기능 제공용 클래스
 		
 		switch (day) {
 		case 1 :
-			result = "월요일"; break;
+			result = "월요일"; 
+			break;
 		case 2 :
-			result = "화요일"; break;
+			result = "화요일"; 
+			break;
 		case 3 :
-			result = "수요일"; break;
+			result = "수요일"; 
+			break;
 		case 4 :
-			result = "목요일"; break;
+			result = "목요일"; 
+			break;
 		case 5 :
-			result = "금요일"; break;
+			result = "금요일"; 
+			break;
 		case 6 :
-			result = "토요일"; break;
+			result = "토요일"; 
+			break;
 		case 7 :
-			result = "일요일"; break;
+			result = "일요일"; 
+			break;
 		default :
 			result = "1 ~ 7 사이의 숫자로 다시 입력해주세요."; 
 		}

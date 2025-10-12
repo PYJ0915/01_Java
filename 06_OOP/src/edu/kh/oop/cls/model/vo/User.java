@@ -57,7 +57,6 @@ public class User {
 		// 단점 : 가독성이 좀 떨어지는 경우가 있다.
 		// 주의할 점: 반드시 생성자 내에서 첫 번째 줄에 작성해야함.
 		this(userId, userPw);
-		
 	//  this.userId = userId;
 	//  this.userPw = userPw;
 		this.userName = userName;

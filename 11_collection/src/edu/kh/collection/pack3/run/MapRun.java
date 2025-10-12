@@ -8,7 +8,7 @@ public class MapRun {
 			
 		// new MapService().ex1();
 		// new MapService().ex2();
-		new MapService().ex3();
+		//new MapService().ex3();
 	}
 
 }

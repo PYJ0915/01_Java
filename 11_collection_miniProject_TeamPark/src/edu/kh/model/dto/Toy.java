@@ -1,23 +1,22 @@
 package edu.kh.model.dto;
 
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class Toy {
-	
+public class Toy implements Comparable<Toy> {
+
 	private String name;
+	private int age;
 	private int price;
 	private String color;
-	private int age;
 	private int date;
 	private Set<String> subs;
-	
-	public Toy() {}
-	
-	
 
-	public Toy(String name, int age, int price, String color, int date, Set subs) {
+	public Toy() {
+
+	}
+
+	public Toy(String name, int age, int price, String color, int date, Set<String> subs) {
 		super();
 		this.name = name;
 		this.age = age;
@@ -25,7 +24,6 @@ public class Toy {
 		this.color = color;
 		this.date = date;
 		this.subs = subs;
-		
 	}
 
 	public String getName() {
@@ -68,16 +66,27 @@ public class Toy {
 		this.date = date;
 	}
 
+	public Set<String> getSubs() {
+		return subs;
+	}
+
+	public void setSubs(Set<String> subs) {
+
+		this.subs = subs;
+
+	}
 
 	@Override
 	public String toString() {
-		return "이름 : " + name + " / 가격 : " + price + " / 색상 : " + color + " / 사용가능연령 : " + age + " / 제조년월일 : " + date + " / 재료 : " ;
-				
+
+		return " 이름 : " + name + " / 가격 : " + price + " / 색상 : " + color + " / 사용가능연령 : " + age + " / 제조년월일 : " + date
+				+ " / 재료 : " + subs;
+
 	}
-	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(age, color, date, name, price);
+		return Objects.hash(age, color, date, name, price, subs);
 	}
 
 	@Override
@@ -90,18 +99,13 @@ public class Toy {
 			return false;
 		Toy other = (Toy) obj;
 		return age == other.age && Objects.equals(color, other.color) && date == other.date
-				&& Objects.equals(name, other.name) && price == other.price;
+				&& Objects.equals(name, other.name) && price == other.price && Objects.equals(subs, other.subs);
 	}
 
-	public Set<String> getSubs() {
-		return subs;
-	}
+	@Override
+	public int compareTo(Toy o) {
 
-	public void setSubs(Set<String> subs) {
-		this.subs = subs;
+		return this.date - o.date;
 	}
-	
-	
-	
 
 }
