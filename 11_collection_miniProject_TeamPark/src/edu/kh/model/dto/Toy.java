@@ -1,5 +1,6 @@
 package edu.kh.model.dto;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -80,8 +81,36 @@ public class Toy implements Comparable<Toy> {
 	public String toString() {
 
 		return " 이름 : " + name + " / 가격 : " + price + " / 색상 : " + color + " / 사용가능연령 : " + age + " / 제조년월일 : " + date
-				+ " / 재료 : " + subs;
+				+ " / 재료 : " + indexOfSubs();
 
+	}
+	
+	/**
+	 * 재료 목록 출력 메서드
+	 * - subs 객체에 있는 재료를 항목별로 출력 (대괄호 제거)
+	 */
+	public String indexOfSubs() { 
+		
+		String sub = ""; // 장난감 별 구성 재료 반환용 변수 선언
+		int count = 1; // 장난감 객체 구성 재료 중 최종 재료 출력 시 쉼표를 제거하기 위한 변수 선언
+		
+		for(String s : subs) { // subs 객체 순회
+			 
+			if(subs.size() != count) { // 마지막 재료가 아닐 때
+			
+				sub += s + ", ";
+				count++;
+			
+			} else { // 마지막 재료
+				
+				sub += s;
+				
+			}
+			
+		}
+		
+		return sub;
+		
 	}
 
 	@Override
