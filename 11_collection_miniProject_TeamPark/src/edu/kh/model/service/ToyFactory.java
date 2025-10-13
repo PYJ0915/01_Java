@@ -198,7 +198,7 @@ public class ToyFactory {
 			System.out.print("재료를 입력하세요 (종료하려면 'q'를 입력하세요) : ");
 			sub = sc.next();
 
-			if (sub.toUpperCase().charAt(0) == 'Q') { 
+			if (sub.toUpperCase().charAt(0) == 'Q') { // q가 입력됐을 때 반복 종료
 				
 				break;
 				
@@ -206,13 +206,13 @@ public class ToyFactory {
 				
 				subs.add(sub);
 				
-			} else {
+			} else { // 재료 없을 시 추가 여부 확인
 				
 				System.out.println("해당하는 재료가 없습니다.");
 				System.out.print("해당 재료를 추가하시겠습니까? (Y/N) : ");
 				char answer = sc.next().toUpperCase().charAt(0);
 				
-				if (answer == 'Y') {
+				if (answer == 'Y') { // Y 입력 시 재료 추가 메서드 연결
 					
 					addSubs();
 					
@@ -220,7 +220,7 @@ public class ToyFactory {
 				
 			}
 			
-		} // q가 입력됐을 때 반복 종료
+		} 
 
 		toySet.add(new Toy(name, age, price, color, date, subs)); // 새로운 장난감 객체 추가
 
