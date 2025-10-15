@@ -7,7 +7,8 @@ public class PracticeRun {
 	public static void main(String[] args) {
 		
 		// new PracticeService().ex1();
-		new PracticeService().ex2();
+		// new PracticeService().ex2();
+		 new PracticeService().ex3();
 
 	}
 

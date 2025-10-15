@@ -145,16 +145,44 @@ public class PracticeService {
 		FileInputStream fis = null;
 		FileOutputStream fos = null;
 		File file = new File("C:/io_practice/20251015/source.txt");
-
+		
+		
 		try {
-
-			if (!file.exists()) {
+			
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			
+			if (!file.exists()) { // 읽어올 파일이 존재하지 않는 경우 => 파일 생성 or 메서드 종료
 
 				System.out.println("읽어올 파일이 존재하지 않습니다.");
+				System.out.print("파일을 생성하시겠습니까? (Y/N): ");
+				String answer = br.readLine();
+				
+				if(answer.toUpperCase().equals("Y")) {
+					
+					file.createNewFile();
+					System.out.println("파일을 생성했습니다.");
+					
+				} else {
+					
+					System.out.println("파일이 존재하지 않아 파일 복사에 실패했습니다.");
+					return;
+				}
+				
 			}
-
+			
+			// 읽어올 파일이 존재하는 경우 => 파일에 있는 내용을 읽어온 후 복사할 파일에 출력
+			
+			
 			fis = new FileInputStream("C:/io_practice/20251015/source.txt");
+			
+			byte[] bytes = fis.readAllBytes();
+			
 			fos = new FileOutputStream("C:/io_practice/20251015/destination.txt");
+			
+			fos.write(bytes);
+			fos.flush();
+			
+			System.out.println("파일 복사가 완료되었습니다.");
 
 		} catch (Exception e) {
 			e.printStackTrace();
