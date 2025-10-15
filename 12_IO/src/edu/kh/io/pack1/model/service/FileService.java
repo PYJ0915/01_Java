@@ -115,7 +115,6 @@ public class FileService {
 			// File 클래스의 메서드는 대부분 IOException 발생
 			// IOException은 반드시 예외처리가 필요한 Checked Exception
 			
-			
 			try {
 				
 				if(file.createNewFile()) { // 파일이 정상 생성된 경우
@@ -162,7 +161,7 @@ public class FileService {
 			
 			
 			// 파일 유형
-			String type = null;
+			String type;
 			
 			if (f.isFile()) {
 				
