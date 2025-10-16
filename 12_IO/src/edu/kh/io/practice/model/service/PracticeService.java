@@ -1,6 +1,7 @@
 package edu.kh.io.practice.model.service;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -144,6 +145,8 @@ public class PracticeService {
 
 		FileInputStream fis = null;
 		FileOutputStream fos = null;
+		FileWriter fw = null;
+		BufferedWriter bw = null;
 		File file = new File("C:/io_practice/20251015/source.txt");
 		
 		
@@ -160,8 +163,29 @@ public class PracticeService {
 				if(answer.toUpperCase().equals("Y")) {
 					
 					file.createNewFile();
+					
+					fw = new FileWriter("C:/io_practice/20251015/source.txt");
+					bw = new BufferedWriter(fw);
+					
 					System.out.println("파일을 생성했습니다.");
 					
+					while(true) {
+					
+						System.out.print("복사할 내용 추가 (입력할 내용이 없으시다면 exit를 입력해주세요): ");
+						String input = br.readLine();
+						
+						if(input.equals("exit")) {
+							
+							break;
+							
+						}
+						
+						bw.write(input + "\n");
+					
+					}
+						
+					bw.flush();
+						
 				} else {
 					
 					System.out.println("파일이 존재하지 않아 파일 복사에 실패했습니다.");
@@ -170,14 +194,12 @@ public class PracticeService {
 				
 			}
 			
+			fis = new FileInputStream("C:/io_practice/20251015/source.txt");
+			fos = new FileOutputStream("C:/io_practice/20251015/destination.txt");
+			
 			// 읽어올 파일이 존재하는 경우 => 파일에 있는 내용을 읽어온 후 복사할 파일에 출력
 			
-			
-			fis = new FileInputStream("C:/io_practice/20251015/source.txt");
-			
 			byte[] bytes = fis.readAllBytes();
-			
-			fos = new FileOutputStream("C:/io_practice/20251015/destination.txt");
 			
 			fos.write(bytes);
 			fos.flush();
@@ -194,6 +216,8 @@ public class PracticeService {
 					fis.close();
 				if (fos != null)
 					fos.close();
+				if (bw != null) 
+					bw.close();
 
 			} catch (Exception e) {
 				e.printStackTrace();
