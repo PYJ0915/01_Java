@@ -16,7 +16,7 @@ public class ClientService {
 		// String serverIP = InetAddress.getLocalHost().getHostAddress();
 		
 		// 2) "127.0.0.1" => loop back IP (현재 컴퓨터의 IP를 나타냄)
-		String serverIP = "192.168.50.229";
+		String serverIP = "127.0.0.1";
 		
 		// ex) 서버 컴퓨터의 IP 주소 : 198.50.212.22
 		// String serverIP = "198.50.212.22"
@@ -24,6 +24,8 @@ public class ClientService {
 		// 지금은 한 대의 컴퓨터로 서버와 클라이언트를 모두 사용 중이기 때문에 IP 주소가 같음
 		
 		int port = 8500;
+		
+		// 소켓/스트림 참조변수 선언
 		
 		Socket clientSocket = null;
 		
