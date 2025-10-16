@@ -29,6 +29,23 @@ public class ServerService {
 	추가 설명 :
 	
 	타임스탬프: 서버나 클라이언트가 메시지를 보내면 그 메시지 앞에 현재 시간을 추가해야 합니다. 예를 들어, "2025년 10월 16일 10:39:55 [서버 메시지]".
+	
+	예시 동작:
+
+	서버 실행:
+	Server started. Waiting for clients...
+
+	클라이언트 실행:
+	Client connected to server.
+
+	서버에서 메시지 전송:
+	2025년 10월 16일 10:39:55 [서버 메시지: Hello from the server!]
+
+	클라이언트에서 메시지 전송:
+	2025년 10월 16일 10:40:05 [클라이언트 메시지: Hello from client!]
+
+	클라이언트가 "exit" 입력:
+	Client disconnected. Exiting...
 
 	*/
 	
