@@ -1,14 +1,19 @@
 package com.hw2s.run;
 
+import java.util.Scanner;
+
 import com.hw2.model.dto.Employee;
 import com.hw2.model.dto.Prisoner;
 import com.hw2.model.service.Company;
 import com.hw2.model.service.ManagementSystem;
 import com.hw2.model.service.Prison;
+import com.hw2s.model.dto.PersonTest;
 
 public class Run {
 	public static void main(String[] args) {
 
+		Scanner sc = new Scanner(System.in);
+		
 		ManagementSystem company = new Company(10);
 		ManagementSystem prison = new Prison(10);
 		// 부모타입 참조변수 = 자식객체 (업캐스팅)
@@ -44,5 +49,65 @@ public class Run {
 		// 현재 남은 수감자 모두 조회
 		prison.displayAllPersons(); // 동적바인딩
 
+		System.out.println("===========================================");
+
+		System.out.println(new PersonTest().explain("서울시 서대문구"));
+
+		String str = "lansfkljanljanvasnblkhnfdaljf";
+
+		for (int i = 0; i < str.length(); i++) {
+
+			char ch = str.charAt(i);
+
+			switch (ch) {
+			case 'a', 'e', 'i', 'o', 'u':
+				System.out.println(ch + " : 모음입니다.");
+				break;
+
+			default:
+				System.out.println(ch + " : 자음입니다.");
+				break;
+			}
+
+		}
+
+		int i = 0;
+		
+		while (true) {
+			
+			i++;
+			
+			if(i > 20) {
+				
+				break;
+				
+			}
+			
+			
+			if (i % 5 == 0) {
+				
+				System.out.println(i + " : 5의 배수입니다." );
+
+			} else {
+				
+				System.out.println(i + " : 5의 배수가 아닙니다.");
+				
+			}
+
+		}
+		
+		
+		String [] strArr = new String[5];
+		
+		for(int j = 0; j < strArr.length; j++) {
+			
+			System.out.print("입력할 내용 : ");
+			String input = sc.nextLine();
+			
+			strArr[j] = input;
+			
+		}
+		
+		
 	}
 }

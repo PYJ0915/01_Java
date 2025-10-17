@@ -7,6 +7,8 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ServerService {
 
@@ -78,7 +80,7 @@ public class ServerService {
 			serverSocket = new ServerSocket(port);
 			
 			System.out.println("[Server]");
-			System.out.println("클라이언트 대기중...");
+			System.out.println("Server started. Waiting for clients...");
 			
 			clientSocket = serverSocket.accept();
 			
@@ -88,7 +90,33 @@ public class ServerService {
 			br = new BufferedReader(new InputStreamReader(is));
 			pw = new PrintWriter(os);
 			
-			System.out.println("클라이언트 접속 성공");
+			Date now = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("<yyyy년 MM월 dd일 HH:mm:ss> ");
+			String nowDate = sdf.format(now);
+			
+			System.out.println(nowDate + clientSocket.getInetAddress().getHostAddress() + ": " + "Client connected to server.");
+			pw.println("Server connection completed");
+			pw.flush();
+			
+			while(true) {
+				
+				System.out.print("메세지 입력 : ");
+				String input = br.readLine();
+				pw.println(nowDate + "[서버메세지 : " + input + "]" );
+				pw.flush();
+				
+				if(br.readLine().equals("exit")) {
+					
+					System.out.println("Client disconnected. Exiting...");
+					break;
+					
+				}
+				
+				String clientMessage = br.readLine();
+				
+				System.out.println(nowDate + clientSocket.getInetAddress().getHostAddress() + "[클라이언트 메세지 : " + clientMessage + "]");
+				
+			}
 			
 			
 			
