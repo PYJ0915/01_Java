@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
 
 public class ClientService {
 
@@ -30,23 +33,47 @@ public class ClientService {
 		BufferedReader br = null;
 		PrintWriter pw = null;
 		
+		Scanner sc = new Scanner(System.in);
+		
 		try {
 			
 			System.out.println("[Client]");
 			
 			clientSocket = new Socket(serverIP, port);
 			
+			Date now = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("<yyyy년 MM월 dd일 HH:mm:ss> ");
+			String nowDate = sdf.format(now);
+			
 			if(clientSocket != null) {
-				
-				
-				System.out.println("서버 접속 완료");
 				
 				is = clientSocket.getInputStream();
 				os = clientSocket.getOutputStream();
-				
 				br = new BufferedReader(new InputStreamReader(is));
 				pw = new PrintWriter(os);
 				
+				String severMessage = br.readLine();
+				System.out.println(severMessage);
+				
+				while(true) {
+					
+					String server = br.readLine();
+					System.out.println(server);
+					
+					System.out.print("메세지 입력 : ");
+					String input = sc.nextLine();
+					
+					if(input.equals("exit")) {
+						
+						System.out.println("The connection to the server was lost...");
+						break;
+						
+					}
+					
+					pw.println(input);
+					pw.flush();
+					
+				}
 				
 			}
 			
