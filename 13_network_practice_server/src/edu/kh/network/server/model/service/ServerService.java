@@ -61,7 +61,7 @@ public class ServerService {
 		BufferedReader br = null;
 		PrintWriter pw = null;
 
-		Scanner sc = new Scanner(System.in);
+		Scanner sc = null;
 
 		try {
 
@@ -83,7 +83,8 @@ public class ServerService {
 			System.out.println("Server started. Waiting for clients...");
 
 			clientSocket = serverSocket.accept();
-
+			
+			sc = new Scanner(System.in);
 			is = clientSocket.getInputStream();
 			os = clientSocket.getOutputStream();
 
@@ -104,7 +105,7 @@ public class ServerService {
 				System.out.print("메세지 입력 : ");
 				String input = sc.nextLine();
 
-				pw.println(nowDate + "[서버메세지 : " + input + "]");
+				pw.println(nowDate + "서버메세지 : " + input);
 				pw.flush();
 
 				String clientMessage = br.readLine();
@@ -116,8 +117,7 @@ public class ServerService {
 
 				}
 				
-				System.out.println(nowDate + " [" + clientSocket.getInetAddress().getHostAddress() + " 클라이언트 메세지 : "
-						+ clientMessage + "]");
+				System.out.println(nowDate + "클라이언트 메세지 : " + clientMessage);
 
 				
 
@@ -135,11 +135,14 @@ public class ServerService {
 					br.close();
 				if (pw != null)
 					pw.close();
-
+				if (sc != null) 
+					sc.close();
+				
 				if (serverSocket != null)
 					serverSocket.close();
 				if (clientSocket != null)
 					clientSocket.close();
+				
 
 			} catch (Exception e) {
 
