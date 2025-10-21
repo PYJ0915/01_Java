@@ -139,7 +139,7 @@ public class FileService {
 		
 		File directory = new File("\\workspace\\01_Java\\12_IO");
 		
-		// 지정된 경로에 있는 모든 파일(디렉토리)를 File[] 형태로 얻어오기
+		// 지정된 경로에 있는 모든 파일(디렉토리)을 File[] 형태로 얻어오기
 		File[] files = directory.listFiles();
 		
 		// 향상된 for 문

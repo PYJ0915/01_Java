@@ -14,7 +14,7 @@ public class ByteService {
 	/*
 	 * 스트림(Stream): 데이터가 이동하는 통로, 기본적으로 한 방향으로 흐름
 	 * 
-	 * 바이트(Byte) 기반 스트림 - 1byte 단위로 데이터를 입/출력하는 스트림 - 최상위 클래스 : InpurStream, OutputStream
+	 * 바이트(Byte) 기반 스트림 - 1byte 단위로 데이터를 입/출력하는 스트림 - 최상위 클래스 : InputStream, OutputStream
 	 * - 문자열, 이미지, 영상, 오디오, pdf 등 모든 것을 입/출력 할 수 있음 
 	 * (단, 통로가 좁다보니 속도가 좀 느리며, 1byte 초과인 문자 같은 경우 깨질 우려 O)
 	 */
