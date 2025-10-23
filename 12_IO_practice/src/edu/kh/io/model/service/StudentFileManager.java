@@ -10,6 +10,8 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import edu.kh.io.model.dto.Student;
+
 public class StudentFileManager {
 
 	private FileWriter fw = null;
@@ -28,12 +30,24 @@ public class StudentFileManager {
 
 	}
 
-	public void writeFile() {
+	public void studentManager() {
 
 		try {
 
 			br = new BufferedReader(new InputStreamReader(System.in));
 			System.out.println("==== 학생 정보 입력 ====");
+			
+			fw = new FileWriter("/io_practice/20251015/students.dat");
+			bw = new BufferedWriter(fw);
+			
+			fr = new FileReader("/io_practice/20251015/students.txt");
+			br = new BufferedReader(fr);
+			
+			fos = new FileOutputStream("/io_practice/20251015/students.dat");
+			oos = new ObjectOutputStream(fos);
+			
+			fis = new FileInputStream("/io_practice/20251015/students.dat");
+			ois = new ObjectInputStream(fis);
 
 			while (true) {
 
@@ -46,11 +60,19 @@ public class StudentFileManager {
 				System.out.print("전공 입력 : ");
 				String major = br.readLine();
 				
+				Student std = new Student(name, age, major);
+				
+				oos.writeObject(std);
+				oos.flush();
+				
 				System.out.print("추가 입력? (y/n): ");
 				String answer = br.readLine();
 				
-				if(answer.toUpperCase().equals("N")) return;
+				if(answer.toUpperCase().equals("N")) {
+					System.out.println("학생 정보 저장 완료!");
 					
+					return;
+				}	
 			}
 
 		} catch (Exception e) {
@@ -61,10 +83,9 @@ public class StudentFileManager {
 
 			try {
 
-				if (br != null)
-					br.close();
-				if (bw != null)
-					bw.close();
+				if(br != null) br.close();
+				if(oos != null) oos.close();
+				if(oos != null) oos.close();
 
 			} catch (Exception e) {
 
