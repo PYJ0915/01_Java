@@ -2,6 +2,7 @@ package practice2.model.service;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -26,18 +27,113 @@ public class BookService {
 		
 		bookList = new ArrayList<Book>();
 		
-		bookList.add(new Book("자바의 정석", "남궁성", 32000));
-		bookList.add(new Book("혼자 공부하는 SQL", "신용권", 28000));
-		bookList.add(new Book("토비의 스프링", "이일민", 45000));
-		bookList.add(new Book("데이터베이스 첫걸음", "미야자키 쇼이치", 22000));
-		bookList.add(new Book("모던 자바 인 액션", "라울 게이브리얼 우르마", 35000));
+		try {
+			
+			File file = new File("books.txt");
+			
+			if(file.exists()) {
+				fr = new FileReader("books.txt");
+				br = new BufferedReader(fr);
+				
+				System.out.println(br.readLine());
+				
+			}
+			
+		} catch (Exception e) {
+					
+				e.printStackTrace();
+				
+			try {
+				
+				if(br != null) br.close();
+				
+			} catch (Exception e2) {
+				
+				e2.printStackTrace();
+				
+			}
+			
+		}
 		
-		bookList.add(new EBook("Effective Java", "조슈야 블로크", 27000, 5.2));
-		bookList.add(new EBook("Clean Code", "로버트 C. 마틴", 26000, 4.8));
-		bookList.add(new EBook("이펙티브 타입스크립트", "댄 밴더캄", 25000, 6.3));
-		bookList.add(new EBook("Real MySQL", "이성욱", 33000, 7.1));
-		bookList.add(new EBook("Do it! 자바 프로그래밍 입문", "박은종", 19000, 3.6));
+
+	}
+	
+	public void bookService() {
+		
+		try {
+			
+			fw = new FileWriter("books.txt");
+			bw = new BufferedWriter(fw);
+			
+			sc = new Scanner(System.in);
+			
+			while(true) {
+				
+				System.out.print("도서명을 입력하세요 : ");
+				String name = sc.nextLine();
+				
+				System.out.print("저자를 입력하세요 : ");
+				String author = sc.nextLine();
+				
+				System.out.print("가격을 입력하세요 : ");
+				int price = sc.nextInt();
+				
+				System.out.print("EBook 여부 (Y/N) : ");
+				char answer = sc.next().toLowerCase().charAt(0);
+				
+				if(answer == 'y') {
+					
+					System.out.print("용량(MB)을 입력하세요 : ");
+					double fileSize = sc.nextDouble();
+					
+					bookList.add(new EBook(name, author, price, fileSize));
+					bw.write(new EBook().getInfo());
+
+					System.out.print("프로그램을 종료하시겠습니까? (Y/N) : ");
+					if(sc.next().toLowerCase().charAt(0) == 'y') {
+						
+						break;
+						
+					}
+					
+				
+					} else {
+						
+						bookList.add(new Book(name, author, price));
+						
+						
+						System.out.print("프로그램을 종료하시겠습니까? (Y/N) : ");
+						if(sc.next().toLowerCase().charAt(0) == 'y') {
+							String book = new Book().getInfo();
+							bw.wr
+							break;
+							
+						}
+					
+				}
+				sc.nextLine();
+			}
+			
+		} catch (Exception e) {
+			
+			try {
+				
+				if(bw != null) bw.close();
+				if(br != null) br.close();
+				if(sc != null) sc.close();
+				
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			
+		}
+		
 		
 	}
+	
+	
+	
+	
+	
 	
 }
