@@ -13,51 +13,51 @@ import practice2.model.dto.Book;
 import practice2.model.dto.EBook;
 
 public class BookService {
-	
+
 	private FileWriter fw = null;
 	private FileReader fr = null;
-	
+
 	private BufferedWriter bw = null;
 	private BufferedReader br = null;
-	
+
 	private List<Book> bookList = null;
 	private Scanner sc = null;
-	
+
 	public BookService() {
-		
+
 		bookList = new ArrayList<Book>();
-		
+
 		try {
-			
+
 			File file = new File("books.txt");
-			
-			if(file.exists()) {
+
+			if (file.exists()) {
 				fr = new FileReader("books.txt");
 				br = new BufferedReader(fr);
-				
+
 				System.out.println(br.readLine());
-				
+
 			}
-			
+
 		} catch (Exception e) {
-					
-				e.printStackTrace();
-				
+
+			e.printStackTrace();
+
 			try {
-				
-				if(br != null) br.close();
-				
+
+				if (br != null)
+					br.close();
+
 			} catch (Exception e2) {
-				
+
 				e2.printStackTrace();
-				
+
 			}
-			
+
 		}
-		
 
 	}
-	
+
 	public void bookService() {
 		
 		try {
@@ -66,6 +66,7 @@ public class BookService {
 			bw = new BufferedWriter(fw);
 			
 			sc = new Scanner(System.in);
+			StringBuilder sb = null;
 			
 			while(true) {
 				
@@ -87,11 +88,13 @@ public class BookService {
 					double fileSize = sc.nextDouble();
 					
 					bookList.add(new EBook(name, author, price, fileSize));
-					bw.write(new EBook().getInfo());
+					sb = new StringBuilder();
+					sb.append(new EBook().getInfo());
 
 					System.out.print("프로그램을 종료하시겠습니까? (Y/N) : ");
 					if(sc.next().toLowerCase().charAt(0) == 'y') {
 						
+						bw.write(sb.toString());
 						break;
 						
 					}
@@ -100,21 +103,28 @@ public class BookService {
 					} else {
 						
 						bookList.add(new Book(name, author, price));
-						
+						sb = new StringBuilder();
+						sb.append(new Book().getInfo());
 						
 						System.out.print("프로그램을 종료하시겠습니까? (Y/N) : ");
 						if(sc.next().toLowerCase().charAt(0) == 'y') {
-							String book = new Book().getInfo();
-							bw.wr
+							
+							bw.write(sb.toString());
 							break;
 							
 						}
 					
 				}
+				
 				sc.nextLine();
+				
 			}
 			
 		} catch (Exception e) {
+			
+			e.printStackTrace();
+			
+		} finally {
 			
 			try {
 				
@@ -122,18 +132,16 @@ public class BookService {
 				if(br != null) br.close();
 				if(sc != null) sc.close();
 				
-			} catch (Exception e2) {
-				e2.printStackTrace();
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+				
 			}
+			
 			
 		}
 		
 		
 	}
-	
-	
-	
-	
-	
-	
+
 }
